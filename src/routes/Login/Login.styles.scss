@@ -1,0 +1,25 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  .login-left {
+    // width: 40%;
+    flex: 1;
+    margin: auto 0;
+    text-align: center;
+  }
+  .login-right {
+    // width: 40%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .login-left {
+    display: none;
+  }
+}

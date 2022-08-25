@@ -1,0 +1,22 @@
+.login-form {
+  padding: 30px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(41, 41, 41, 0.9);
+  border-radius: 5px;
+  border: 1px solid transparent;
+
+  .form-button {
+    background-color: #0d6efd;
+    border-radius: 5px;
+    width: 50%;
+    margin: 5px auto;
+    cursor: pointer;
+  }
+
+  a {
+    color: #0d6efd;
+  }
+}

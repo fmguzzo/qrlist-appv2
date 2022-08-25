@@ -1,24 +1,19 @@
-import api from '../../services/api';
-import errorHandler from '../../services/errorHandler';
+import { loginService, registerService } from "../../services/user.services";
+import errorHandler from "../../utils/errorHandler";
 
-import { StorePersist } from '../../utils/store.utils';
-import { createAction } from '../../utils/reducer.utils';
+import { StorePersist } from "../../utils/store.utils";
+import { createAction } from "../../utils/reducer.utils";
 
-import USER_ACTION_TYPES from './user.types';
+import USER_ACTION_TYPES from "./user.types";
 
 //import { SITE_UPDATE_PROFILE_RESET } from "../constants/siteConstants";
 
-export const login = (email, password) => async (dispatch) => {
+export const loginAsync = (email, password) => async (dispatch) => {
   dispatch(createAction(USER_ACTION_TYPES.USER_LOGIN_REQUEST));
   try {
-    // TODO: Hash password
-    const { data } = await api.post('/api/v1/sessions', {
-      email,
-      password,
-    });
-
-    dispatch(createAction(USER_ACTION_TYPES.USER_LOGIN_SUCCESS, data));
-    StorePersist.set(StorePersist.PERSIST_KEYS.USER_INFO, data);
+    const user = await loginService(email, password);
+    dispatch(createAction(USER_ACTION_TYPES.USER_LOGIN_SUCCESS, user));
+    StorePersist.set(StorePersist.PERSIST_KEYS.USER_INFO, user);
   } catch (error) {
     dispatch(
       createAction(USER_ACTION_TYPES.USER_LOGIN_FAILED, errorHandler(error))
@@ -35,25 +30,22 @@ export const logout = () => (dispatch) => {
   dispatch({ type: ORDER_LIST_MY_RESET })
   dispatch({ type: USER_LIST_RESET })
   */
-  document.location.href = '/';
+  document.location.href = "/";
 };
 
-export const register =
+export const registerAsync =
   (firstName, lastName, email, password, passwordConfirmation) =>
   async (dispatch) => {
     dispatch(createAction(USER_ACTION_TYPES.USER_REGISTER_REQUEST));
-
     try {
-      // TODO: Hash password
-      const { data } = await api.post('/api/v1/users', {
+      const user = await registerService(
         firstName,
         lastName,
         email,
         password,
-        passwordConfirmation,
-      });
-
-      dispatch(createAction(USER_ACTION_TYPES.USER_REGISTER_SUCCESS, data));
+        passwordConfirmation
+      );
+      dispatch(createAction(USER_ACTION_TYPES.USER_REGISTER_SUCCESS, user));
     } catch (error) {
       dispatch(
         createAction(

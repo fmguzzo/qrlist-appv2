@@ -1,5 +1,6 @@
+import "./Footer.styles.scss";
 const Footer = () => {
-  return <div>Footer</div>;
+  return <footer>Copyright &copy; Fernando Guzzo 2022</footer>;
 };
 
 export default Footer;

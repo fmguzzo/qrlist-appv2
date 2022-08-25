@@ -1,7 +1,7 @@
-import axios from 'axios';
-import configApp from '../config/configApp';
-import { StorePersist } from '../../utils/store/store.utils';
-import APP_CONSTANTS from '../constants/app.constants';
+import axios from "axios";
+import configApp from "../config/configApp";
+import { StorePersist } from "../utils/store.utils";
+import APP_CONSTANTS from "../constants/app.constants";
 
 axios.defaults.withCredentials = true;
 
