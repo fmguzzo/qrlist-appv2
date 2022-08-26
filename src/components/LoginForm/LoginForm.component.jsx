@@ -4,7 +4,7 @@ import loginSchema from "./LoginForm.schema";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Message from "../Message/Message.component";
-import InputField from "../InputField/InputField.component";
+import FormikInput from "../FormikInput/FormikInput.component";
 import { loginAsync } from "../../store/user/user.action";
 import { selectUserReducer } from "../../store/user/user.selector";
 
@@ -14,7 +14,7 @@ const LoginForm = ({ history }) => {
   const { userInfo, error } = useSelector(selectUserReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loginSubmitHandler = ({ email, password }, { setErrors }) => {
+  const handleLoginSubmit = ({ email, password }, { setErrors }) => {
     return dispatch(loginAsync(email, password));
   };
 
@@ -31,11 +31,11 @@ const LoginForm = ({ history }) => {
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={loginSchema}
-          onSubmit={loginSubmitHandler}
+          onSubmit={handleLoginSubmit}
         >
           {({ isSubmitting }) => (
             <Form>
-              <InputField
+              <FormikInput
                 fieldClass=""
                 labelClass=""
                 inputClass=""
@@ -44,7 +44,7 @@ const LoginForm = ({ history }) => {
                 type="email"
               />
 
-              <InputField
+              <FormikInput
                 fieldClass=""
                 labelClass=""
                 inputClass=""

@@ -10,7 +10,7 @@ import "./Header.styles.scss";
 const Header = () => {
   const { userInfo } = useSelector(selectUserReducer);
   const dispatch = useDispatch();
-  const logoutHandler = () => {
+  const handleLogout = () => {
     dispatch(logout());
   };
   // return (
@@ -52,7 +52,7 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-link nav-link-right">
-              <span onClick={logoutHandler}>Logout</span>
+              <span onClick={handleLogout}>Logout</span>
             </li>
           </>
         ) : (

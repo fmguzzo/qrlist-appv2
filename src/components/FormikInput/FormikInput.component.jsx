@@ -1,6 +1,6 @@
 import { useField } from "formik";
 
-const TextField = ({ label, ...props }) => {
+const FormikInput = ({ label, ...props }) => {
   const { fieldClass, labelClass, inputClass, name, type } = props;
   const [field, { error, touched }] = useField(props);
 
@@ -17,4 +17,4 @@ const TextField = ({ label, ...props }) => {
   );
 };
 
-export default TextField;
+export default FormikInput;

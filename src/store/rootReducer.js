@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import { userReducer } from './user/user.reducer';
-import { listReducer } from './list/list.reducer';
+import { userReducer } from "./user/user.reducer";
+import { siteReducer } from "./site/site.reducer";
 
 export const rootReducer = combineReducers({
   user: userReducer,
-  list: listReducer,
+  site: siteReducer,
 });

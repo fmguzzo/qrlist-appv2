@@ -7,7 +7,7 @@ import { Formik, Form } from "formik";
 import registerSchema from "./Register.schema";
 
 import Message from "../../components/Message/Message.component";
-import InputField from "../../components/InputField/InputField.component";
+import FormikInput from "../../components/FormikInput/FormikInput.component";
 
 import "./Register.styles.scss";
 
@@ -59,7 +59,7 @@ const Register = () => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <InputField
+            <FormikInput
               fieldClass=""
               labelClass=""
               inputClass=""
@@ -67,7 +67,7 @@ const Register = () => {
               name="firstName"
               type="text"
             />
-            <InputField
+            <FormikInput
               fieldClass=""
               labelClass=""
               inputClass=""
@@ -75,7 +75,7 @@ const Register = () => {
               name="lastName"
               type="text"
             />
-            <InputField
+            <FormikInput
               fieldClass=""
               labelClass=""
               inputClass=""
@@ -83,7 +83,7 @@ const Register = () => {
               name="email"
               type="email"
             />
-            <InputField
+            <FormikInput
               fieldClass=""
               labelClass=""
               inputClass=""
@@ -91,7 +91,7 @@ const Register = () => {
               name="password"
               type="password"
             />
-            <InputField
+            <FormikInput
               fieldClass=""
               labelClass=""
               inputClass=""

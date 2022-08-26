@@ -1,12 +1,16 @@
 import api from "./api.services";
 
 export const loginService = async (email, password) => {
-  // TODO: Hash password
-  const { data } = await api.post("/api/v1/sessions", {
-    email,
-    password,
-  });
-  return data;
+  try {
+    // TODO: Hash password
+    const { data } = await api.post("/api/v1/sessions", {
+      email,
+      password,
+    });
+    return data;
+  } catch (error) {
+    throw Error(error.message);
+  }
 };
 
 export const registerService = async (
@@ -16,13 +20,17 @@ export const registerService = async (
   password,
   passwordConfirmation
 ) => {
-  // TODO: Hash password
-  const { data } = await api.post("/api/v1/users", {
-    firstName,
-    lastName,
-    email,
-    password,
-    passwordConfirmation,
-  });
-  return data;
+  try {
+    // TODO: Hash password
+    const { data } = await api.post("/api/v1/users", {
+      firstName,
+      lastName,
+      email,
+      password,
+      passwordConfirmation,
+    });
+    return data;
+  } catch (error) {
+    throw Error(error.message);
+  }
 };
