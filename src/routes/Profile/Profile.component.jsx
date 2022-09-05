@@ -76,9 +76,9 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-      {fetchStatus === "loading" ? (
-        <Spinner />
-      ) : fetchStatus === "succeeded" ? (
+      {fetchStatus === "failed" && <DataNotFound message={error} />}
+      {fetchStatus === "loading" && <Spinner />}
+      {fetchStatus === "succeeded" && (
         <>
           <h2>User Profile</h2>
           <form onSubmit={handleSubmit}>
@@ -135,8 +135,6 @@ const Profile = () => {
           </form>
           <ToastContainer autoClose={2000} />
         </>
-      ) : (
-        <DataNotFound message={error} />
       )}
     </div>
   );
