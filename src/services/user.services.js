@@ -9,7 +9,7 @@ export const loginService = async (email, password) => {
     });
     return data;
   } catch (error) {
-    throw Error(error.message);
+    return Promise.reject(error);
   }
 };
 
@@ -31,6 +31,6 @@ export const registerService = async (
     });
     return data;
   } catch (error) {
-    throw Error(error.message);
+    return Promise.reject(error);
   }
 };

@@ -8,7 +8,7 @@ import List from "./routes/List/List.component";
 import Login from "./routes/Login/Login.component";
 import Profile from "./routes/Profile/Profile.component";
 import Register from "./routes/Register/Register.component";
-import NotFound from "./routes/NotFound/NotFound.component";
+import PageNotFound from "./routes/PageNotFound/PageNotFound.component";
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
         <Route path="list" element={<List />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>
   );

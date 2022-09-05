@@ -5,7 +5,7 @@ export const fetchSiteServices = async () => {
     const { data } = await api.get("/api/v1/site");
     return data;
   } catch (error) {
-    return Promise.reject(error.message);
+    return Promise.reject(error);
   }
 };
 
@@ -14,6 +14,6 @@ export const updateSiteServices = async (profile) => {
     const { data } = await api.put("/api/v1/site", profile);
     return data;
   } catch (error) {
-    return Promise.reject(error.message);
+    return Promise.reject(error);
   }
 };

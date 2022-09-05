@@ -8,8 +8,10 @@ import {
 } from "../../store/site/site.action";
 import FormInput from "../../components/FormInput/FormInput.component";
 import Button from "../../components/Button/Button.component";
-import Message from "../../components/Message/Message.component";
 import Spinner from "../../components/Spinner/Spinner.component";
+import DataNotFound from "../../components/DataNotFound/DataNotFound.component";
+import { ToastContainer } from "react-toastify";
+
 import "./Profile.styles.scss";
 
 const defaultFormFields = {
@@ -29,17 +31,16 @@ const Profile = () => {
 
   const dispatch = useDispatch();
 
-  const [formFilds, setFormFields] = useState(defaultFormFields);
-  const { business, address, city, postalCode, phone, email } = formFilds;
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { business, address, city, postalCode, phone, email } = formFields;
 
   useEffect(() => {
     if (!didFetchRef.current) {
-      // didFetchRef.current = true;
+      didFetchRef.current = true;
       dispatch(fetchSiteAsync());
     }
     return function cleanup() {
       dispatch(resetSiteReducer());
-      didFetchRef.current = true;
     };
   }, []);
 
@@ -70,14 +71,14 @@ const Profile = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormFields({ ...formFilds, [name]: value });
+    setFormFields({ ...formFields, [name]: value });
   };
 
   return (
     <div className="profile-container">
       {fetchStatus === "loading" ? (
         <Spinner />
-      ) : (
+      ) : fetchStatus === "succeeded" ? (
         <>
           <h2>User Profile</h2>
           <form onSubmit={handleSubmit}>
@@ -130,25 +131,12 @@ const Profile = () => {
               value={email}
             />
 
-            <FormInput
-              label="Email"
-              type="email"
-              onChange={handleChange}
-              name="email"
-              value={email}
-            />
-
-            <FormInput
-              label="Email"
-              type="email"
-              onChange={handleChange}
-              name="email"
-              value={email}
-            />
-
             <Button type="submit">Save</Button>
           </form>
+          <ToastContainer autoClose={2000} />
         </>
+      ) : (
+        <DataNotFound message={error} />
       )}
     </div>
   );

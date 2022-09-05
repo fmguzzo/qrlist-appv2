@@ -7,6 +7,7 @@ import {
 
 import errorHandler from "../../utils/errorHandler";
 import { createAction } from "../../utils/reducer.utils";
+import { toast } from "react-toastify";
 
 export const fetchSiteAsync = () => async (dispatch) => {
   dispatch(createAction(SITE_ACTION_TYPES.SITE_DETAILS_REQUEST));
@@ -14,9 +15,9 @@ export const fetchSiteAsync = () => async (dispatch) => {
     const site = await fetchSiteServices();
     dispatch(createAction(SITE_ACTION_TYPES.SITE_DETAILS_SUCCESS, site));
   } catch (error) {
-    dispatch(
-      createAction(SITE_ACTION_TYPES.SITE_DETAILS_FAILED, errorHandler(error))
-    );
+    const errorMessage = errorHandler(error);
+    dispatch(createAction(SITE_ACTION_TYPES.SITE_DETAILS_FAILED, errorMessage));
+    toast.error(errorMessage);
   }
 };
 
@@ -25,10 +26,12 @@ export const updateSiteAsync = (profile) => async (dispatch) => {
   try {
     const site = await updateSiteServices(profile);
     dispatch(createAction(SITE_ACTION_TYPES.SITE_UPDATE_SUCCESS, site));
+    toast.success("Profile was updated.");
   } catch (error) {
-    dispatch(
-      createAction(SITE_ACTION_TYPES.SITE_UPDATE_FAILED, errorHandler(error))
-    );
+    const errorMessage = errorHandler(error);
+    dispatch(createAction(SITE_ACTION_TYPES.SITE_UPDATE_FAILED, errorMessage));
+    toast.error("Profile was not updated.");
+    toast.error(errorMessage);
   }
 };
 
