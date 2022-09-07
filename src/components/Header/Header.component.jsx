@@ -13,26 +13,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logout());
   };
-  // return (
-  //   <header className="header-container">
-  //     <div className="header-brand">
-  //       <Link to="/">
-  //         <BrandLogo className="header-brand-logo" />
-  //       </Link>
-  //     </div>
-  //     <div className="header-links-container">
-  //       <Link className="header-link" to="/">
-  //         Home
-  //       </Link>
-  //       <Link className="header-link" to="list">
-  //         List
-  //       </Link>
-  //       <Link className="header-link link-push" to="login">
-  //         Login
-  //       </Link>
-  //     </div>
-  //   </header>
-  // );
+
   return (
     <nav className="nav-container sticky">
       <ul className="nav-main">
@@ -53,6 +34,7 @@ const Header = () => {
             </li>
             <li className="nav-link nav-link-right">
               <span onClick={handleLogout}>Logout</span>
+              <span>{` (${userInfo.email})`}</span>
             </li>
           </>
         ) : (

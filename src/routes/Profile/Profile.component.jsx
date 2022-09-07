@@ -40,6 +40,7 @@ const Profile = () => {
       dispatch(fetchSiteAsync());
     }
     return function cleanup() {
+      // TODO: Cancel first API Call - Now with useRef() cancel second fetch
       dispatch(resetSiteReducer());
     };
   }, []);
