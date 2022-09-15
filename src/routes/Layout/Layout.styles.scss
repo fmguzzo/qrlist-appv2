@@ -7,8 +7,9 @@
 .main-container {
   // height: 85%;
   // height: 83vh;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //width: 100%;
+  min-height: calc(100vh - 105px);
 }
