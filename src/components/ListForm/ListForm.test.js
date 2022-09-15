@@ -20,13 +20,15 @@ describe("<ListForm />", () => {
       listToUpdate,
     };
 
-    test("Render content", () => {
+    test("Render input & button contect", () => {
       render(<ListForm {...props} />);
 
       const buttonElement = screen.getByText(btnUpdateText);
+      const inputNameEl = screen.getByDisplayValue(listToUpdate.name);
+      const inputDescEl = screen.getByDisplayValue(listToUpdate.desc);
       expect(buttonElement).toBeInTheDocument();
-      const inputElement = screen.getByDisplayValue(listToUpdate.name);
-      expect(inputElement).toBeInTheDocument();
+      expect(inputNameEl).toBeInTheDocument();
+      expect(inputDescEl).toBeInTheDocument();
     });
 
     test("Click the button calls event handler once", () => {
@@ -43,22 +45,48 @@ describe("<ListForm />", () => {
     const props = {
       handleOnSubmit: jest.fn(),
     };
+    const listToCreate = {
+      name: "New",
+      desc: "New desc",
+      active: false,
+    };
 
-    test("Render content", () => {
+    test("Render initial content", () => {
       render(<ListForm {...props} />);
 
-      screen.getByText(btnCreateText);
+      const buttonElement = screen.getByText(btnCreateText);
+      const inputNameEl = screen.getByRole("textbox", { name: "name" });
+      const inputDescEl = screen.getByRole("textbox", { name: "desc" });
+      expect(buttonElement).toBeInTheDocument();
+      expect(inputNameEl).toBeInTheDocument();
+      expect(inputDescEl).toBeInTheDocument();
+      expect(inputNameEl).toHaveValue("");
+      expect(inputDescEl).toHaveValue("");
     });
 
-    // TODO: Input value in a form
-    // test.only("Click the button calls event handler once", () => {
-    //   render(<ListForm {...props} />);
+    test("Form input should change", () => {
+      render(<ListForm {...props} />);
 
-    //   const inputName = screen.getByRole("textbox", { name: /name/i });
-    //   console.log(prettyDOM(inputName));
-    //   const buttonElement = screen.getByText(btnCreateText);
-    //   fireEvent.click(buttonElement);
-    //   //expect(props.handleOnSubmit).toBeCalled();
-    // });
+      const inputNameEl = screen.getByRole("textbox", { name: "name" });
+      const inputDescEl = screen.getByRole("textbox", { name: "desc" });
+      fireEvent.change(inputNameEl, { target: { value: listToCreate.name } });
+      fireEvent.change(inputDescEl, { target: { value: listToCreate.desc } });
+
+      expect(inputNameEl).toHaveValue(listToCreate.name);
+      expect(inputDescEl).toHaveValue(listToCreate.desc);
+    });
+
+    test("Click the button calls event handler once", () => {
+      render(<ListForm {...props} />);
+
+      const buttonElement = screen.getByText(btnCreateText);
+      const inputNameEl = screen.getByRole("textbox", { name: "name" });
+      const inputDescEl = screen.getByRole("textbox", { name: "desc" });
+      fireEvent.change(inputNameEl, { target: { value: listToCreate.name } });
+      fireEvent.change(inputDescEl, { target: { value: listToCreate.desc } });
+
+      fireEvent.click(buttonElement);
+      expect(props.handleOnSubmit).toBeCalledWith(listToCreate);
+    });
   });
 });

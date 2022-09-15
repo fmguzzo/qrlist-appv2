@@ -68,6 +68,7 @@ const ListForm = (props) => {
           required
           onChange={handleInputChange}
           name="name"
+          aria-label="name"
           value={name}
         />
 
@@ -77,6 +78,7 @@ const ListForm = (props) => {
           maxLength="50"
           onChange={handleInputChange}
           name="desc"
+          aria-label="desc"
           value={desc}
         />
 
